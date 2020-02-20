@@ -68,18 +68,6 @@ if(!$mail->send()) {
 	$email = filter_var(trim($_POST['email']),
 	FILTER_SANITIZE_STRING);
 
-	if(mb_strlen($name) <3 || mb_strlen($name) >90){
-		echo "Недопустимая длина логина!";
-		exit();
-	} else if(mb_strlen($tel) <11 || mb_strlen($tel) >30){
-		echo "Недопустимая длина номера!";
-		exit();
-	} else if(mb_strlen($tel) <4 || mb_strlen($tel) >30){
-		echo "Допустимая длина пароля - от 4 до 30 символов!";
-		exit();
-	}	
-
-
 	$mysql = new mysqli('localhost','host1809744','f535e322','host1809744');
 	    // Проверяем, успешность соединения. 
     if (mysqli_connect_errno()) { 
