@@ -19,49 +19,51 @@
 <main role="main" class="container">
 
   <div class="row">
-    <div class="col-4">
-      <?php
-        $mysqli = new mysqli("localhost", "host1809744", "f535e322", "host1809744");
-        $result_set = $mysqli->query("SELECT * FROM `menu`");
-        $items = array();
-        while (($row = $result_set->fetch_assoc()) != false) $items[$row["id"]] = $row;
-        $childrens = array();
-        foreach ($items as $item) {
-          if ($item["parent_id"]) $childrens[$item["id"]] = $item["parent_id"];
-        }
-        function printItem($item, $items, $childrens) {
-          echo "<li>";
-          echo "<a href='".$item["link"]."'>".$item["title"]."</a>";
-          $ul = false; 
-          while (true) {
-            $key = array_search($item["id"], $childrens);
-            if (!$key) {
-              if ($ul) echo "</ul>"; 
-              break; 
-            }
-            unset($childrens[$key]);
-            if (!$ul) {
-              echo "<ul>";
-              $ul = true; 
-            }
-            echo printItem($items[$key], $items, $childrens); 
-          }
-          echo "</li>";
-        }
-      ?>
-      <div id="menu">
-        <h2>Меню</h2>
-        <ul>
-          <?php
-            foreach ($items as $item) {
-              if (!$item["parent_id"]) echo printItem($item, $items, $childrens);
-            }
-          ?>
-        </ul>
-      </div> 
-    </div>
+    
+    <div class="col-4"> <!-- запрос на каталог -->
 
-    <div class="col-8">
+        <?php
+          $mysqli = new mysqli("localhost", "host1809744", "f535e322", "host1809744");
+          $result_set = $mysqli->query("SELECT * FROM `menu`");
+          $items = array();
+          while (($row = $result_set->fetch_assoc()) != false) $items[$row["id"]] = $row;
+          $childrens = array();
+          foreach ($items as $item) {
+            if ($item["parent_id"]) $childrens[$item["id"]] = $item["parent_id"];
+          }
+          function printItem($item, $items, $childrens) {
+            echo "<li>";
+            echo "<a href='".$item["link"]."'>".$item["title"]."</a>";
+            $ul = false; 
+            while (true) {
+              $key = array_search($item["id"], $childrens);
+              if (!$key) {
+                if ($ul) echo "</ul>"; 
+                break; 
+              }
+              unset($childrens[$key]);
+              if (!$ul) {
+                echo "<ul>";
+                $ul = true; 
+              }
+              echo printItem($items[$key], $items, $childrens); 
+            }
+            echo "</li>";
+          }
+        ?>
+        <div id="menu">
+          <h2>Меню</h2> <!-- вывод меню из бд -->
+          <ul>
+            <?php
+              foreach ($items as $item) {
+                if (!$item["parent_id"]) echo printItem($item, $items, $childrens);
+              }
+            ?>
+          </ul>
+        </div> 
+      </div> <!-- /.col-4 -->
+
+    <div class="col-8"> <!-- запрос на таблицу -->
       <?php
         $str= mysqli_connect('localhost', 'host1809744', 'f535e322', 'host1809744');
         $select= mysqli_query($str, "SELECT id, name, tel, email FROM `users`;");
@@ -84,8 +86,10 @@
         echo '</table>';
         mysqli_close($str);
       ?>
-    </div>
-  </div>
+    </div><!-- /.col-8 -->
+  </div> <!-- row -->
+  
+  <!-- модальное окно -->
 
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelleddy="exampleModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -118,7 +122,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> <!-- /.modal fade -->
 
 </main><!-- /.container -->
 

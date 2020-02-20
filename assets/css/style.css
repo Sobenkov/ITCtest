@@ -1,29 +1,42 @@
-.navbar a {
-	color: #fff;
+.navbar a
+{
+    color: #fff;
 }
 
-.container{
-	padding-top: 100px;
-	width: 1400px;
+.container
+{
+    width: 1400px;
+    padding-top: 100px;
 }
 
-.navbar{
-	justify-content: flex-end;
+.navbar
+{
+    justify-content: flex-end;
 }
 
-table {
-	text-align: center;
+table
+{
+    text-align: center;
 }
 
-tr:nth-child(even) { 
-	background-color: #64b5f6; 
+tr:nth-child(even)
+{
+    background-color: #64b5f6;
 }
 
-.modal-title{
-		margin-left: 15px;
+.modal-title
+{
+    margin-left: 15px;
 }
 
-.btn-primary{
-	margin: 20px 0;
-	padding: 10px 40px;
+.btn-primary
+{
+    margin: 20px 0;
+    padding: 10px 40px;
+}
+
+.check
+{
+	margin-top: 50px;
+   text-align: center;
 }
